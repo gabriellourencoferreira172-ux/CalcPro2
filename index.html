@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Calculadora Pro Ultra</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button id="themeBtn" class="btn-icon" title="Alternar tema">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-calculator"></i>
+                <h1>Calc<span>Pro</span></h1>
+            </div>
+            <div class="header-actions">
+                <button id="historyBtn" class="btn-icon" title="Histórico">
+                    <i class="fas fa-clock-rotate-left"></i>
+                </button>
+                <button id="convertBtn" class="btn-icon" title="Conversor de Unidades">
+                    <i class="fas fa-right-left"></i>
+                </button>
+                <button id="programmerBtn" class="btn-icon" title="Modo Programador">
+                    <i class="fas fa-code"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Calculator -->
+        <main class="calculator">
+            <!-- Display -->
+            <div class="display-container">
+                <div class="memory-indicator" id="memoryIndicator">M</div>
+                <div class="mode-indicators">
+                    <span id="degRadIndicator" class="indicator active">DEG</span>
+                    <span id="modeLabel" class="indicator">BÁSICA</span>
+                </div>
+                <div class="expression" id="expression"></div>
+                <div class="result" id="result">0</div>
+                <div class="preview" id="preview"></div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="basic">Básica</button>
+                <button class="tab-btn" data-tab="scientific">Científica</button>
+                <button class="tab-btn" data-tab="extra">Extra</button>
+            </div>
+
+            <!-- Keypad -->
+            <div class="keypad">
+                <!-- Memory Row -->
+                <div class="memory-row" id="memoryRow">
+                    <button class="mem-btn" data-action="mc"><i class="fas faeraser"></i>MC</button>
+                    <button class="mem-btn" data-action="mr"><i class="fas fa-redo"></i>MR</button>
+                    <button class="mem-btn" data-action="m+"><i class="fas fa-plus"></i>M+</button>
+                    <button class="mem-btn" data-action="m-"><i class="fas fa-minus"></i>M-</button>
+                    <button class="mem-btn" data-action="ms"><i class="fas fa-save"></i>MS</button>
+                </div>
+
+                <!-- Scientific Tab -->
+                <div class="tab-content" id="scientificContent">
+                    <div class="sci-keys">
+                        <button class="key sci-key" data-action="deg-rad" data-value="toggle">DRG</button>
+                        <button class="key sci-key" data-action="sin">sin</button>
+                        <button class="key sci-key" data-action="cos">cos</button>
+                        <button class="key sci-key" data-action="tan">tan</button>
+                        <button class="key sci-key" data-action="log">log</button>
+                        <button class="key sci-key" data-action="ln">ln</button>
+                        <button class="key sci-key" data-action="exp">eˣ</button>
+                        <button class="key sci-key" data-action="10x">10ˣ</button>
+                        <button class="key sci-key" data-action="inv">1/x</button>
+                        <button class="key sci-key" data-action="square">x²</button>
+                        <button class="key sci-key" data-action="cube">x³</button>
+                        <button class="key sci-key" data-action="power">xʸ</button>
+                        <button class="key sci-key" data-action="sqrt">√x</button>
+                        <button class="key sci-key" data-action="cbrt">∛x</button>
+                        <button class="key sci-key" data-action="nthroot">ⁿ√x</button>
+                        <button class="key sci-key" data-action="fact">x!</button>
+                        <button class="key sci-key" data-action="pi">π</button>
+                        <button class="key sci-key" data-action="e">e</button>
+                        <button class="key sci-key" data-action="abs">|x|</button>
+                        <button class="key sci-key" data-action="mod">mod</button>
+                    </div>
+                </div>
+
+                <!-- Basic Tab -->
+                <div class="tab-content active" id="basicContent">
+                    <div class="calc-grid">
+                        <!-- Row 1 -->
+                        <button class="key function-key" data-action="clear">AC</button>
+                        <button class="key function-key" data-action="toggle-sign">+/−</button>
+                        <button class="key function-key" data-action="percent">%</button>
+                        <button class="key operator-key" data-action="divide">÷</button>
+
+                        <!-- Row 2 -->
+                        <button class="key number-key" data-value="7">7</button>
+                        <button class="key number-key" data-value="8">8</button>
+                        <button class="key number-key" data-value="9">9</button>
+                        <button class="key operator-key" data-action="multiply">×</button>
+
+                        <!-- Row 3 -->
+                        <button class="key number-key" data-value="4">4</button>
+                        <button class="key number-key" data-value="5">5</button>
+                        <button class="key number-key" data-value="6">6</button>
+                        <button class="key operator-key" data-action="subtract">−</button>
+
+                        <!-- Row 4 -->
+                        <button class="key number-key" data-value="1">1</button>
+                        <button class="key number-key" data-value="2">2</button>
+                        <button class="key number-key" data-value="3">3</button>
+                        <button class="key operator-key" data-action="add">+</button>
+
+                        <!-- Row 5 -->
+                        <button class="key number-key wide" data-value="0">0</button>
+                        <button class="key number-key" data-value=".">.</button>
+                        <button class="key equals-key" data-action="calculate">=</button>
+                    </div>
+                </div>
+
+                <!-- Extra Tab -->
+                <div class="tab-content" id="extraContent">
+                    <div class="extra-grid">
+                        <button class="key function-key" data-action="paren-open">(</button>
+                        <button class="key function-key" data-action="paren-close">)</button>
+                        <button class="key function-key" data-action="backspace"><i class="fas fa-delete-left"></i></button>
+                        <button class="key function-key" data-action="constant-e">e</button>
+
+                        <button class="key function-key" data-action="factorial">n!</button>
+                        <button class="key function-key" data-action="percent-of">% of</button>
+                        <button class="key function-key" data-action="reciprocal">¹/x</button>
+                        <button class="key operator-key" data-action="divide">÷</button>
+
+                        <button class="key function-key" data-action="sqr-root">√</button>
+                        <button class="key function-key" data-action="cbrt-root">∛</button>
+                        <button class="key function-key" data-action="pow2">x²</button>
+                        <button class="key function-key" data-action="pow3">x³</button>
+
+                        <button class="key function-key" data-action="pow">xʸ</button>
+                        <button class="key function-key" data-action="10pow">10ˣ</button>
+                        <button class="key function-key" data-action="exp">eˣ</button>
+                        <button class="key function-key" data-action="abs-val">|x|</button>
+
+                        <button class="key function-key" data-action="log10">log</button>
+                        <button class="key function-key" data-action="natural-log">ln</button>
+                        <button class="key function-key" data-action="sinh">sinh</button>
+                        <button class="key function-key" data-action="cosh">cosh</button>
+
+                        <button class="key function-key" data-action="tanh">tanh</button>
+                        <button class="key function-key" data-action="atan">atan</button>
+                        <button class="key function-key" data-action="asin">asin</button>
+                        <button class="key function-key" data-action="acos">acos</button>
+
+                        <button class="key function-key" data-action="permutation">nPr</button>
+                        <button class="key function-key" data-action="combination">nCr</button>
+                        <button class="key function-key" data-action="floor">⌊x⌋</button>
+                        <button class="key function-key" data-action="ceil">⌈x⌉</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- History Panel -->
+    <div class="panel-overlay" id="historyOverlay">
+        <aside class="side-panel history-panel" id="historyPanel">
+            <div class="panel-header">
+                <h3><i class="fas fa-clock-rotate-left"></i> Histórico</h3>
+                <button class="close-panel" id="closeHistory"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="panel-actions">
+                <button class="btn-clear-history" id="clearHistory"><i class="fas fa-trash"></i> Limpar</button>
+            </div>
+            <div class="history-list" id="historyList"></div>
+        </aside>
+    </div>
+
+    <!-- Converter Panel -->
+    <div class="panel-overlay" id="converterOverlay">
+        <aside class="side-panel converter-panel" id="converterPanel">
+            <div class="panel-header">
+                <h3><i class="fas fa-right-left"></i> Conversor de Unidades</h3>
+                <button class="close-panel" id="closeConverter"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="converter-tabs">
+                <button class="conv-tab active" data-category="length">📏 Comprimento</button>
+                <button class="conv-tab" data-category="weight">⚖️ Peso</button>
+                <button class="conv-tab" data-category="temperature">🌡️ Temperatura</button>
+                <button class="conv-tab" data-category="area">📐 Área</button>
+                <button class="conv-tab" data-category="volume">💧 Volume</button>
+                <button class="conv-tab" data-category="speed">🏎️ Velocidade</button>
+                <button class="conv-tab" data-category="data">💾 Dados</button>
+            </div>
+            <div class="converter-body">
+                <div class="converter-input-group">
+                    <label>De:</label>
+                    <input type="number" id="fromValue" value="1">
+                    <select id="fromUnit"></select>
+                </div>
+                <button class="convert-swap" id="swapUnits"><i class="fas fa-arrow-down-up"></i></button>
+                <div class="converter-input-group">
+                    <label>Para:</label>
+                    <input type="number" id="toValue" readonly>
+                    <select id="toUnit"></select>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Programmer Mode Overlay -->
+    <div class="panel-overlay" id="programmerOverlay">
+        <aside class="side-panel programmer-panel" id="programmerPanel">
+            <div class="panel-header">
+                <h3><i class="fas fa-code"></i> Modo Programador</h3>
+                <button class="close-panel" id="closeProgrammer"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="programmer-display" id="progDisplay">
+                <div class="prog-expression" id="progExpression"></div>
+                <div class="prog-result" id="progResult">0</div>
+            </div>
+            <div class="base-buttons">
+                <button class="base-btn active" data-base="DEC">DEC</button>
+                <button class="base-btn" data-base="HEX">HEX</button>
+                <button class="base-btn" data-base="OCT">OCT</button>
+                <button class="base-btn" data-base="BIN">BIN</button>
+            </div>
+            <div class="prog-keys">
+                <div class="prog-grid">
+                    <button class="prog-key" data-value="A">A</button>
+                    <button class="prog-key" data-value="B">B</button>
+                    <button class="prog-key" data-value="C">C</button>
+                    <button class="prog-key op-key" data-action="prog-op" data-op="AND">&</button>
+
+                    <button class="prog-key" data-value="D">D</button>
+                    <button class="prog-key" data-value="E">E</button>
+                    <button class="prog-key" data-value="F">F</button>
+                    <button class="prog-key op-key" data-action="prog-op" data-op="OR">|</button>
+
+                    <button class="prog-key" data-action="prog-clear">C</button>
+                    <button class="prog-key" data-value="0">0</button>
+                    <button class="prog-key" data-value="1">1</button>
+                    <button class="prog-key op-key" data-action="prog-op" data-op="XOR">^</button>
+
+                    <button class="prog-key" data-action="prog-back"><i class="fas fa-delete-left"></i></button>
+                    <button class="prog-key" data-value="2">2</button>
+                    <button class="prog-key" data-value="3">3</button>
+                    <button class="prog-key op-key" data-action="prog-op" data-op="NOT">¬</button>
+
+                    <button class="prog-key" data-action="prog-shift-left"><<</button>
+                    <button class="prog-key" data-value="4">4</button>
+                    <button class="prog-key" data-value="5">5</button>
+                    <button class="prog-key op-key" data-action="prog-op" data-op="SHL">≪</button>
+
+                    <button class="prog-key" data-action="prog-shift-right">>></button>
+                    <button class="prog-key" data-value="6">6</button>
+                    <button class="prog-key" data-value="7">7</button>
+                    <button class="prog-key op-key" data-action="prog-op" data-op="SHR">≫</button>
+
+                    <button class="prog-key" data-action="prog-mod">MOD</button>
+                    <button class="prog-key" data-value="8">8</button>
+                    <button class="prog-key" data-value="9">9</button>
+                    <button class="prog-key equals-prog-key" data-action="prog-calc">=</button>
+                </div>
+            </div>
+            <div class="bitwise-results" id="bitwiseResults">
+                <div class="bit-item">
+                    <span class="bit-label">BIN</span>
+                    <span class="bit-value" id="binValue">0</span>
+                </div>
+                <div class="bit-item">
+                    <span class="bit-label">OCT</span>
+                    <span class="bit-value" id="octValue">0</span>
+                </div>
+                <div class="bit-item">
+                    <span class="bit-label">DEC</span>
+                    <span class="bit-value" id="decValue">0</span>
+                </div>
+                <div class="bit-item">
+                    <span class="bit-label">HEX</span>
+                    <span class="bit-value" id="hexValue">0</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
